@@ -8,7 +8,7 @@ export default {
       maps: {
         daily:["ultraezrajal", "ultrawarden", "ultraengineer", "ultratyndarius"],
         weekly: ["ultradrago", "ultranulgath", "championdrakath", "ultradage", "ultradarkon"],
-        va: ["thevoid", "icestormarena", "hydrachallenge", "chaoskraken", "ancienttrigoras", "gravechallenge"]
+        va: ["shadowfall","voidflibbi", "icestormarena", "hydrachallenge", "chaoskraken", "ancienttrigoras", "gravechallenge"]
       },
       show: {
         daily: true,
