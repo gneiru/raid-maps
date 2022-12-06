@@ -12,8 +12,8 @@ export default {
       },
       show: {
         daily: true,
-        weekly: true,
-        va: false
+        weekly: false,
+        va: true
       }
     }
   },
