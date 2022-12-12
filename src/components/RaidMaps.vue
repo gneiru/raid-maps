@@ -3,8 +3,9 @@
 export default {
   data() {
     return {
-      roomNum: "1001",
+      roomNum: '1001',
       joinCMD: '/join ',
+      buttons: [],
       maps: {
         daily:["ultraezrajal", "ultrawarden", "ultraengineer", "ultratyndarius"],
         weekly: ["ultradrago", "ultranulgath", "championdrakath", "ultradage", "ultradarkon"],
@@ -33,6 +34,33 @@ export default {
           document.getSelection().removeAllRanges();    
           document.getSelection().addRange(selected);   
         }
+    },
+    updateButtonInnerText(button) {
+      // Get the width and height of the button
+      var buttonWidth = button.offsetWidth;
+      var buttonHeight = button.offsetHeight;
+
+      // Update the inner text of the button to a check icon
+      var checkIcon = document.createElement('i');
+      checkIcon.className = 'fas fa-check';
+      button.innerHTML = '';
+      button.appendChild(checkIcon);
+
+      // Set the width and height of the button
+      button.style.width = buttonWidth + 'px';
+      button.style.height = buttonHeight + 'px';
+
+      // Reset the inner text of all the buttons in the array
+      this.buttons.forEach(b => {
+        if (b !== button) {
+          b.innerText = 'Copy';
+        }
+      });
+    
+
+    // Add the clicked button to the array of buttons
+    this.buttons.push(button);
+
     }
   }
 }
@@ -45,8 +73,7 @@ export default {
     <div class="flex flex-cols-3 gap-4">
       <div>
         <label class="label">Room Number</label>
-        <input autocomplete="off" class="myInput shrink" type="number" v-model="roomNum">
-        
+        <input autocomplete="off" class="myInput shrink" type="number" v-model="roomNum" >    
       </div>
       <div class="flex-cols-1 p-5">
         <div>
@@ -69,7 +96,7 @@ export default {
     <div class="flex-auto" v-show="show.daily === true">
       <strong>Daily Ultras </strong>
       <div v-for="map in maps.daily" class="map">
-        <button class="button" @click="copy(map)"> Copy </button>
+        <button class="button" @click="copy(map); updateButtonInnerText($event.target)"> Copy </button>
         {{joinCMD}}<strong>{{map}}</strong>-{{roomNum}}
       </div>
     </div>
@@ -77,7 +104,7 @@ export default {
     <div class="flex-auto" v-show="show.weekly === true">
       <strong>Weekly Ultras </strong>
       <div v-for="map in maps.weekly" class="map">
-        <button class="button" @click="copy(map)"> Copy </button>
+        <button class="button" @click="copy(map); updateButtonInnerText($event.target)"> Copy </button>
         {{joinCMD}}<strong>{{map}}</strong>-{{roomNum}}
       </div>
     </div>
@@ -85,7 +112,7 @@ export default {
     <div class="flex-auto" v-show="show.va === true">
       <strong>Daily VAs</strong> 
       <div v-for="map in maps.va" class="map">
-        <button class="button" @click="copy(map)"> Copy </button>
+        <button class="button" @click="copy(map); updateButtonInnerText($event.target)"> Copy </button>
         {{joinCMD}}<strong>{{map}}</strong>-{{roomNum}}
       </div>
     </div>
@@ -188,5 +215,4 @@ export default {
   margin-bottom: 2px;
   color: #ff9248;
 }
-
 </style>
